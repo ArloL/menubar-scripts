@@ -14,6 +14,8 @@ elif pgrep -f "react-scripts" > /dev/null; then
     echo ◼︎
 elif pgrep "java" > /dev/null; then
     echo ◼︎
+elif pgrep "postgres" > /dev/null; then
+    echo ◼︎
 else
     echo ◻
 fi
