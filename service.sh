@@ -36,6 +36,7 @@ if [ "${1:-}" = "" ]; then
     cat "${TEMP_FILE}"
 else
     if [ -s "${TEMP_FILE}" ]; then
+        rm -f "${1}"
         cat "${TEMP_FILE}" > "${1}"
     else
         rm -f "${1}"
