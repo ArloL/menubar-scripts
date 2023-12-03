@@ -64,12 +64,10 @@ jobs:
     - uses: actions/checkout@v4.1.1
     - name: Create Release
       id: create_release
-      uses: actions/create-release@v1.1.4
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: ncipollo/release-action@v1.13.0
       with:
-        tag_name: v${{ needs.version.outputs.new_version }}
-        release_name: Release ${{ needs.version.outputs.new_version }}
+        tag: v${{ needs.version.outputs.new_version }}
+        name: Release ${{ needs.version.outputs.new_version }}
         body: ${{ needs.version.outputs.changelog }}
         draft: true
     - uses: eregon/publish-release@v1.0.5
