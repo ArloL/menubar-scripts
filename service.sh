@@ -28,6 +28,9 @@ check_daemons() {
     if pgrep "postgres" > /dev/null; then
         echo "postgres"
     fi
+    if pgrep "ollama" > /dev/null; then
+        echo "ollama"
+    fi
 }
 
 check_daemons > "${TEMP_FILE}"
