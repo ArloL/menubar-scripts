@@ -76,7 +76,7 @@ jobs:
         name: Release ${{ needs.version.outputs.new_version }}
         body: ${{ needs.version.outputs.changelog }}
         draft: true
-    - uses: eregon/publish-release@v1.0.5
+    - uses: eregon/publish-release@v1.0.6
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
