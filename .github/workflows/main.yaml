@@ -43,7 +43,7 @@ jobs:
       new_version: ${{ steps.output.outputs.new_version }}
       build_timestamp: ${{ steps.output.outputs.build_timestamp }}
     steps:
-    - uses: actions/checkout@v4.2.0
+    - uses: actions/checkout@v4.2.2
     - name: Bump version and push tag
       id: tag
       if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}
@@ -63,7 +63,7 @@ jobs:
     permissions:
       contents: write
     steps:
-    - uses: actions/checkout@v4.2.0
+    - uses: actions/checkout@v4.2.2
     - name: Create Release
       id: create_release
       uses: ncipollo/release-action@v1.14.0
