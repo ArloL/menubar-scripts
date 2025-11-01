@@ -3,7 +3,7 @@ name: Main
 on:
   push:
   schedule:
-  - cron: '24 4 11 * *'
+  - cron: "24 4 11 * *"
 permissions: {}
 
 jobs:
@@ -60,7 +60,8 @@ jobs:
     - name: Make sure build did not change anything
       run: git diff --exit-code
   release:
-    needs: [version]
+    needs:
+    - version
     if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     permissions:
@@ -73,16 +74,16 @@ jobs:
       id: create_release
       uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
       with:
-        tag: v${{ needs.version.outputs.new_version }}
-        name: Release ${{ needs.version.outputs.new_version }}
         draft: true
+        name: Release ${{ needs.version.outputs.new_version }}
+        tag: v${{ needs.version.outputs.new_version }}
     - uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
       with:
-        tag: v${{ needs.version.outputs.new_version }}
         allowUpdates: true
         immutableCreate: true
         omitBodyDuringUpdate: true
         omitNameDuringUpdate: true
+        tag: v${{ needs.version.outputs.new_version }}
         updateOnlyUnreleased: true
     - name: Make sure build did not change anything
       run: git diff --exit-code
@@ -93,6 +94,6 @@ jobs:
     - name: Trigger livecheck on ArloL/homebrew-tap
       uses: peter-evans/repository-dispatch@5fc4efd1a4797ddb68ffd0714a238564e4cc0e6f # v4.0.0
       with:
-        token: ${{ secrets.LIVECHECK_PAT }}
-        repository: ArloL/homebrew-tap
         event-type: livecheck
+        repository: ArloL/homebrew-tap
+        token: ${{ secrets.LIVECHECK_PAT }}
