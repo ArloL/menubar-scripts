@@ -76,19 +76,11 @@ jobs:
       with:
         persist-credentials: false
     - name: Create Release
-      id: create_release
-      uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd # v1.21.0
-      with:
-        draft: true
-        name: Release ${{ needs.version.outputs.new_version }}
-        tag: v${{ needs.version.outputs.new_version }}
-    - uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd # v1.21.0
-      with:
-        allowUpdates: true
-        immutableCreate: true
-        omitBodyDuringUpdate: true
-        omitNameDuringUpdate: true
-        tag: v${{ needs.version.outputs.new_version }}
-        updateOnlyUnreleased: true
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NEW_VERSION: ${{ needs.version.outputs.new_version }}
+      run: |
+        gh release create "v${NEW_VERSION}" \
+          --title "Release ${NEW_VERSION}"
     - name: Make sure build did not change anything
       run: git diff --exit-code
