@@ -31,6 +31,9 @@ check_daemons() {
     if pgrep "ollama" > /dev/null; then
         echo "ollama"
     fi
+    if pgrep "vite" > /dev/null; then
+        echo "vite"
+    fi
 }
 
 check_daemons > "${TEMP_FILE}"
