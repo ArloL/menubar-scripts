@@ -31,6 +31,21 @@ check_daemons() {
     if pgrep "ollama" > /dev/null; then
         echo "ollama"
     fi
+    if pgrep "qemu-system-aarch64" > /dev/null || pgrep "qemu-system-x86_64" > /dev/null; then
+        echo "qemu"
+    fi
+    if pgrep "krunkit" > /dev/null; then
+        echo "krunkit"
+    fi
+    if pgrep "vfkit" > /dev/null; then
+        echo "vfkit"
+    fi
+    if pgrep "hyperkit" > /dev/null; then
+        echo "hyperkit"
+    fi
+    if pgrep -f "com.docker.virtualization" > /dev/null; then
+        echo "docker-vm"
+    fi
     if pgrep "vite" > /dev/null; then
         echo "vite"
     fi
